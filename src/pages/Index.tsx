@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import RegisterModal from "@/components/RegisterModal";
+import SmetaSection from "@/components/SmetaSection";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -258,6 +259,23 @@ const Index = () => {
 
           {/* Основной контент */}
           <div className="flex-1 flex flex-col">
+
+            {/* Раздел «Смета» */}
+            {activeSection === "смета" && <SmetaSection />}
+
+            {/* Разделы «Аналитика», «Команда», «Отчёты» — заглушки */}
+            {["аналитика", "команда", "отчёты"].includes(activeSection) && (
+              <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
+                <div className="w-16 h-16 bg-[#252c3d] rounded-2xl flex items-center justify-center mb-4">
+                  <Icon name={activeSection === "аналитика" ? "BarChart2" : activeSection === "команда" ? "Users" : "ClipboardList"} size={28} className="text-[#8892a4]" />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 capitalize">{activeSection}</h3>
+                <p className="text-[#8892a4] text-sm max-w-xs">Этот раздел появится в следующем обновлении платформы</p>
+              </div>
+            )}
+
+            {/* Раздел «Расходы» */}
+            {activeSection === "расходы" && <>
             {/* Заголовок раздела */}
             <div className="h-12 bg-[#1a1f2e] border-b border-[#0d1017] flex items-center px-4 gap-2">
               <Button
@@ -465,6 +483,7 @@ const Index = () => {
                 </div>
               </div>
             </div>
+            </>}
           </div>
         </div>
       </div>
