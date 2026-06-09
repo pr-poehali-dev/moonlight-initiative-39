@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import RegisterModal from "@/components/RegisterModal";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("расходы");
+  const [showRegister, setShowRegister] = useState(false);
+  const [registeredCompany, setRegisteredCompany] = useState("");
 
   const channels = [
     { name: "расходы", icon: "Receipt" },
@@ -93,8 +96,19 @@ const Index = () => {
     },
   ];
 
+  const handleRegisterSuccess = (company: string, project: string) => {
+    setRegisteredCompany(company);
+    setShowRegister(false);
+  };
+
   return (
     <div className="min-h-screen bg-[#1a1f2e] text-white overflow-x-hidden">
+      {showRegister && (
+        <RegisterModal
+          onClose={() => setShowRegister(false)}
+          onSuccess={handleRegisterSuccess}
+        />
+      )}
       {/* Навигация */}
       <nav className="bg-[#141824] border-b border-[#0d1017] px-4 sm:px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -111,7 +125,7 @@ const Index = () => {
             <Button variant="ghost" className="text-[#8892a4] hover:text-white hover:bg-[#252c3d]">
               Войти
             </Button>
-            <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white px-6 py-2 rounded-lg text-sm font-medium">
+            <Button onClick={() => setShowRegister(true)} className="bg-[#e67e22] hover:bg-[#d35400] text-white px-6 py-2 rounded-lg text-sm font-medium">
               Начать бесплатно
             </Button>
           </div>
@@ -130,7 +144,7 @@ const Index = () => {
               <Button variant="ghost" className="text-[#8892a4] hover:text-white hover:bg-[#252c3d] justify-start">
                 Войти
               </Button>
-              <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white px-6 py-2 rounded-lg text-sm font-medium">
+              <Button onClick={() => setShowRegister(true)} className="bg-[#e67e22] hover:bg-[#d35400] text-white px-6 py-2 rounded-lg text-sm font-medium">
                 Начать бесплатно
               </Button>
             </div>
@@ -282,7 +296,7 @@ const Index = () => {
                       аналитика и рассылка отчётов заинтересованным лицам — всё в одном месте.
                     </p>
                     <div className="flex flex-wrap gap-3">
-                      <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white font-medium px-5">
+                      <Button onClick={() => setShowRegister(true)} className="bg-[#e67e22] hover:bg-[#d35400] text-white font-medium px-5">
                         <Icon name="Plus" size={16} className="mr-2" />
                         Зарегистрировать компанию
                       </Button>
@@ -428,7 +442,7 @@ const Index = () => {
                   Зарегистрируйте компанию и добавьте первый объект за 5 минут
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white px-8 py-2 font-medium">
+                  <Button onClick={() => setShowRegister(true)} className="bg-[#e67e22] hover:bg-[#d35400] text-white px-8 py-2 font-medium">
                     Начать бесплатно
                   </Button>
                   <Button variant="ghost" className="text-[#c8d0de] hover:text-white hover:bg-[#252c3d] border border-[#252c3d]">
