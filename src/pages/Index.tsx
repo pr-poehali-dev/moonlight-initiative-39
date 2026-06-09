@@ -1,465 +1,454 @@
 import { useState } from "react";
-import {
-  Download,
-  Shield,
-  Zap,
-  Eye,
-  Clock,
-  Github,
-  ArrowRight,
-  Hash,
-  Users,
-  Mic,
-  Settings,
-  Bell,
-  Search,
-  Menu,
-  X,
-  Monitor,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Icon from "@/components/ui/icon";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("расходы");
+
+  const channels = [
+    { name: "расходы", icon: "Receipt" },
+    { name: "смета", icon: "FileText" },
+    { name: "аналитика", icon: "BarChart2" },
+    { name: "команда", icon: "Users" },
+    { name: "отчёты", icon: "ClipboardList" },
+  ];
+
+  const projects = ["Жилой комплекс А", "ТЦ Восток", "Склад №3", "Офисный центр"];
+
+  const receipts = [
+    {
+      author: "Прораб Иванов",
+      avatar: "П",
+      avatarColor: "#e67e22",
+      time: "Сегодня в 10:23",
+      text: "Добавил чек на покупку арматуры",
+      amount: "₽ 142 500",
+      category: "Материалы",
+      categoryColor: "#27ae60",
+    },
+    {
+      author: "Заказчик Смирнов",
+      avatar: "З",
+      avatarColor: "#2980b9",
+      time: "Сегодня в 11:45",
+      text: "Просматривает отчёт за июнь",
+      amount: null,
+      category: null,
+      categoryColor: null,
+    },
+    {
+      author: "Дизайнер Петрова",
+      avatar: "Д",
+      avatarColor: "#8e44ad",
+      time: "Вчера в 16:30",
+      text: "Добавила чек на отделочные материалы",
+      amount: "₽ 87 200",
+      category: "Отделка",
+      categoryColor: "#e74c3c",
+    },
+    {
+      author: "Прораб Иванов",
+      avatar: "П",
+      avatarColor: "#e67e22",
+      time: "Вчера в 14:10",
+      text: "Добавил чек на аренду техники",
+      amount: "₽ 35 000",
+      category: "Техника",
+      categoryColor: "#f39c12",
+    },
+  ];
+
+  const features = [
+    {
+      icon: "Receipt",
+      title: "Учёт чеков и расходов",
+      desc: "Все траты по проекту в одном месте — кто, когда и на что потратил деньги.",
+    },
+    {
+      icon: "FileText",
+      title: "Составление смет",
+      desc: "Создавайте подробные сметы с позициями, единицами и итоговыми суммами.",
+    },
+    {
+      icon: "BarChart2",
+      title: "Аналитика и отчёты",
+      desc: "Наглядная аналитика по проектам, разбивка по категориям и периодам.",
+    },
+    {
+      icon: "Users",
+      title: "Управление командой",
+      desc: "Добавляйте прорабов, заказчиков и дизайнеров — у каждого свой доступ.",
+    },
+    {
+      icon: "Send",
+      title: "Рассылка отчётов",
+      desc: "Отправляйте отчёты заинтересованным лицам в один клик.",
+    },
+    {
+      icon: "Building2",
+      title: "Несколько объектов",
+      desc: "Ведите учёт одновременно по нескольким строительным проектам.",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-[#36393f] text-white overflow-x-hidden">
-      {/* Навигация в стиле Discord */}
-      <nav className="bg-[#2f3136] border-b border-[#202225] px-4 sm:px-6 py-4">
+    <div className="min-h-screen bg-[#1a1f2e] text-white overflow-x-hidden">
+      {/* Навигация */}
+      <nav className="bg-[#141824] border-b border-[#0d1017] px-4 sm:px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#5865f2] rounded-full flex items-center justify-center">
-              <Monitor className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#e67e22] rounded-xl flex items-center justify-center">
+              <Icon name="HardHat" size={20} className="text-white" />
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl font-bold text-white">Дискордик</h1>
-              <p className="text-xs text-[#b9bbbe] hidden sm:block">Rich Presence для Figma в Discord</p>
+              <h1 className="text-lg sm:text-xl font-bold text-white">СтройУчёт</h1>
+              <p className="text-xs text-[#8892a4] hidden sm:block">Платформа управления строительными проектами</p>
             </div>
           </div>
           <div className="hidden sm:flex items-center gap-4">
-            <Button variant="ghost" className="text-[#b9bbbe] hover:text-white hover:bg-[#40444b]">
-              <Github className="w-4 h-4 mr-2" />
-              GitHub
+            <Button variant="ghost" className="text-[#8892a4] hover:text-white hover:bg-[#252c3d]">
+              Войти
             </Button>
-            <Button className="bg-[#5865f2] hover:bg-[#4752c4] text-white px-6 py-2 rounded text-sm font-medium">
-              Скачать
+            <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white px-6 py-2 rounded-lg text-sm font-medium">
+              Начать бесплатно
             </Button>
           </div>
           <Button
             variant="ghost"
-            className="sm:hidden text-[#b9bbbe] hover:text-white hover:bg-[#40444b] p-2"
+            className="sm:hidden text-[#8892a4] hover:text-white hover:bg-[#252c3d] p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={20} />
           </Button>
         </div>
 
-        {/* Мобильное меню */}
         {mobileMenuOpen && (
-          <div className="sm:hidden mt-4 pt-4 border-t border-[#202225]">
+          <div className="sm:hidden mt-4 pt-4 border-t border-[#0d1017]">
             <div className="flex flex-col gap-3">
-              <Button variant="ghost" className="text-[#b9bbbe] hover:text-white hover:bg-[#40444b] justify-start">
-                <Github className="w-4 h-4 mr-2" />
-                GitHub
+              <Button variant="ghost" className="text-[#8892a4] hover:text-white hover:bg-[#252c3d] justify-start">
+                Войти
               </Button>
-              <Button className="bg-[#5865f2] hover:bg-[#4752c4] text-white px-6 py-2 rounded text-sm font-medium">
-                Скачать
+              <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white px-6 py-2 rounded-lg text-sm font-medium">
+                Начать бесплатно
               </Button>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Макет в стиле Discord */}
+      {/* Основной макет */}
       <div className="flex min-h-screen">
-        {/* Боковая панель серверов - скрыта на мобильных */}
-        <div className="hidden lg:flex w-[72px] bg-[#202225] flex-col items-center py-3 gap-2">
-          <div className="w-12 h-12 bg-[#5865f2] rounded-2xl hover:rounded-xl transition-all duration-200 flex items-center justify-center cursor-pointer">
-            <Monitor className="w-6 h-6 text-white" />
+        {/* Боковая панель проектов */}
+        <div className="hidden lg:flex w-[72px] bg-[#0d1017] flex-col items-center py-3 gap-2">
+          <div className="w-12 h-12 bg-[#e67e22] rounded-2xl hover:rounded-xl transition-all duration-200 flex items-center justify-center cursor-pointer">
+            <Icon name="HardHat" size={22} className="text-white" />
           </div>
-          <div className="w-8 h-[2px] bg-[#36393f] rounded-full"></div>
-          {[1, 2, 3, 4].map((i) => (
+          <div className="w-8 h-[2px] bg-[#1a1f2e] rounded-full my-1"></div>
+          {projects.map((p, i) => (
             <div
               key={i}
-              className="w-12 h-12 bg-[#36393f] rounded-3xl hover:rounded-xl transition-all duration-200 flex items-center justify-center cursor-pointer hover:bg-[#5865f2]"
+              title={p}
+              className="w-12 h-12 bg-[#1a1f2e] rounded-3xl hover:rounded-xl transition-all duration-200 flex items-center justify-center cursor-pointer hover:bg-[#e67e22] group"
             >
-              <span className="text-[#dcddde] text-sm font-medium">{i}</span>
+              <span className="text-[#8892a4] group-hover:text-white text-sm font-bold">{p.charAt(0)}</span>
             </div>
           ))}
+          <div className="w-12 h-12 bg-[#1a1f2e] rounded-3xl hover:rounded-xl transition-all duration-200 flex items-center justify-center cursor-pointer hover:bg-[#27ae60] mt-1">
+            <Icon name="Plus" size={20} className="text-[#8892a4]" />
+          </div>
         </div>
 
-        {/* Основной контент */}
         <div className="flex-1 flex flex-col lg:flex-row">
-          {/* Боковая панель каналов */}
-          <div
-            className={`${mobileSidebarOpen ? "block" : "hidden"} lg:block w-full lg:w-60 bg-[#2f3136] flex flex-col`}
-          >
-            <div className="p-4 border-b border-[#202225] flex items-center justify-between">
-              <h2 className="text-white font-semibold text-base">Сервер Дискордик</h2>
+          {/* Боковая панель разделов */}
+          <div className={`${mobileSidebarOpen ? "block" : "hidden"} lg:block w-full lg:w-60 bg-[#141824] flex flex-col`}>
+            <div className="p-4 border-b border-[#0d1017] flex items-center justify-between">
+              <div>
+                <h2 className="text-white font-semibold text-base">Жилой комплекс А</h2>
+                <p className="text-[#8892a4] text-xs mt-0.5">Активный проект</p>
+              </div>
               <Button
                 variant="ghost"
-                className="lg:hidden text-[#b9bbbe] hover:text-white hover:bg-[#40444b] p-1"
+                className="lg:hidden text-[#8892a4] hover:text-white hover:bg-[#252c3d] p-1"
                 onClick={() => setMobileSidebarOpen(false)}
               >
-                <X className="w-4 h-4" />
+                <Icon name="X" size={16} />
               </Button>
             </div>
+
             <div className="flex-1 p-2">
               <div className="mb-4">
-                <div className="flex items-center gap-1 px-2 py-1 text-[#8e9297] text-xs font-semibold uppercase tracking-wide">
-                  <ArrowRight className="w-3 h-3" />
-                  <span>Текстовые каналы</span>
+                <div className="flex items-center gap-1 px-2 py-1 text-[#8892a4] text-xs font-semibold uppercase tracking-wide">
+                  <Icon name="ChevronDown" size={12} />
+                  <span>Разделы</span>
                 </div>
                 <div className="mt-1 space-y-0.5">
-                  {["общий", "новости", "витрина", "помощь"].map((channel) => (
+                  {channels.map((ch) => (
                     <div
-                      key={channel}
-                      className="flex items-center gap-1.5 px-2 py-1 rounded text-[#8e9297] hover:text-[#dcddde] hover:bg-[#393c43] cursor-pointer"
+                      key={ch.name}
+                      onClick={() => setActiveSection(ch.name)}
+                      className={`flex items-center gap-2 px-2 py-1.5 rounded cursor-pointer transition-colors ${
+                        activeSection === ch.name
+                          ? "bg-[#252c3d] text-white"
+                          : "text-[#8892a4] hover:text-[#c8d0de] hover:bg-[#1e2536]"
+                      }`}
                     >
-                      <Hash className="w-4 h-4" />
-                      <span className="text-sm">{channel}</span>
+                      <Icon name={ch.icon} size={16} />
+                      <span className="text-sm">{ch.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
+
               <div>
-                <div className="flex items-center gap-1 px-2 py-1 text-[#8e9297] text-xs font-semibold uppercase tracking-wide">
-                  <ArrowRight className="w-3 h-3" />
-                  <span>Голосовые каналы</span>
+                <div className="flex items-center gap-1 px-2 py-1 text-[#8892a4] text-xs font-semibold uppercase tracking-wide">
+                  <Icon name="ChevronDown" size={12} />
+                  <span>Команда</span>
                 </div>
                 <div className="mt-1 space-y-0.5">
-                  {["Общий", "Обзор дизайна"].map((channel) => (
+                  {[
+                    { name: "Прораб Иванов", color: "#e67e22", role: "Прораб" },
+                    { name: "Заказчик Смирнов", color: "#2980b9", role: "Заказчик" },
+                    { name: "Дизайнер Петрова", color: "#8e44ad", role: "Дизайнер" },
+                  ].map((m) => (
                     <div
-                      key={channel}
-                      className="flex items-center gap-1.5 px-2 py-1 rounded text-[#8e9297] hover:text-[#dcddde] hover:bg-[#393c43] cursor-pointer"
+                      key={m.name}
+                      className="flex items-center gap-2 px-2 py-1.5 rounded text-[#8892a4] hover:text-[#c8d0de] hover:bg-[#1e2536] cursor-pointer"
                     >
-                      <Mic className="w-4 h-4" />
-                      <span className="text-sm">{channel}</span>
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: m.color }}></div>
+                      <span className="text-sm truncate">{m.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-            {/* Область пользователя */}
-            <div className="p-2 bg-[#292b2f] flex items-center gap-2">
-              <div className="w-8 h-8 bg-[#5865f2] rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-medium">А</span>
+
+            {/* Пользователь */}
+            <div className="p-2 bg-[#0d1017] flex items-center gap-2">
+              <div className="w-8 h-8 bg-[#e67e22] rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-bold">К</span>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-white text-sm font-medium truncate">Алексей</div>
-                <div className="text-[#b9bbbe] text-xs truncate">#1234</div>
+                <div className="text-white text-sm font-medium truncate">Компания «СтройМаст»</div>
+                <div className="text-[#8892a4] text-xs truncate flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 bg-[#27ae60] rounded-full inline-block"></span>
+                  Администратор
+                </div>
               </div>
-              <div className="flex gap-1">
-                <Button variant="ghost" size="sm" className="w-8 h-8 p-0 hover:bg-[#40444b]">
-                  <Mic className="w-4 h-4 text-[#b9bbbe]" />
-                </Button>
-                <Button variant="ghost" size="sm" className="w-8 h-8 p-0 hover:bg-[#40444b]">
-                  <Settings className="w-4 h-4 text-[#b9bbbe]" />
-                </Button>
-              </div>
+              <Button variant="ghost" size="sm" className="w-8 h-8 p-0 hover:bg-[#252c3d]">
+                <Icon name="Settings" size={16} className="text-[#8892a4]" />
+              </Button>
             </div>
           </div>
 
-          {/* Область чата */}
+          {/* Основной контент */}
           <div className="flex-1 flex flex-col">
-            {/* Заголовок чата */}
-            <div className="h-12 bg-[#36393f] border-b border-[#202225] flex items-center px-4 gap-2">
+            {/* Заголовок раздела */}
+            <div className="h-12 bg-[#1a1f2e] border-b border-[#0d1017] flex items-center px-4 gap-2">
               <Button
                 variant="ghost"
-                className="lg:hidden text-[#8e9297] hover:text-[#dcddde] hover:bg-[#40444b] p-1 mr-2"
+                className="lg:hidden text-[#8892a4] hover:text-[#c8d0de] hover:bg-[#252c3d] p-1 mr-2"
                 onClick={() => setMobileSidebarOpen(true)}
               >
-                <Menu className="w-5 h-5" />
+                <Icon name="Menu" size={20} />
               </Button>
-              <Hash className="w-5 h-5 text-[#8e9297]" />
-              <span className="text-white font-semibold">витрина</span>
-              <div className="w-px h-6 bg-[#40444b] mx-2 hidden sm:block"></div>
-              <span className="text-[#8e9297] text-sm hidden sm:block">Показывай свою работу в Figma с Дискордик</span>
-              <div className="ml-auto flex items-center gap-2 sm:gap-4">
-                <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-[#b9bbbe] cursor-pointer hover:text-[#dcddde]" />
-                <Users className="w-4 h-4 sm:w-5 sm:h-5 text-[#b9bbbe] cursor-pointer hover:text-[#dcddde]" />
-                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-[#b9bbbe] cursor-pointer hover:text-[#dcddde]" />
+              <Icon name="Receipt" size={18} className="text-[#8892a4]" />
+              <span className="text-white font-semibold">расходы</span>
+              <div className="w-px h-6 bg-[#252c3d] mx-2 hidden sm:block"></div>
+              <span className="text-[#8892a4] text-sm hidden sm:block">Учёт всех затрат по проекту в реальном времени</span>
+              <div className="ml-auto flex items-center gap-3">
+                <Icon name="Bell" size={18} className="text-[#8892a4] cursor-pointer hover:text-[#c8d0de]" />
+                <Icon name="Users" size={18} className="text-[#8892a4] cursor-pointer hover:text-[#c8d0de]" />
+                <Icon name="Search" size={18} className="text-[#8892a4] cursor-pointer hover:text-[#c8d0de]" />
               </div>
             </div>
 
-            {/* Сообщения чата */}
-            <div className="flex-1 p-2 sm:p-4 space-y-4 sm:space-y-6 overflow-y-auto">
-              {/* Приветственное сообщение */}
-              <div className="flex gap-2 sm:gap-4">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#5865f2] rounded-full flex items-center justify-center flex-shrink-0">
-                  <Monitor className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-white font-medium text-sm sm:text-base">Дискордик Бот</span>
-                    <span className="bg-[#5865f2] text-white text-xs px-1 rounded">БОТ</span>
-                    <span className="text-[#72767d] text-xs hidden sm:inline">Сегодня в 12:00</span>
+            {/* Лента расходов */}
+            <div className="flex-1 p-4 space-y-6 overflow-y-auto">
+
+              {/* Hero-блок */}
+              <div className="bg-gradient-to-br from-[#e67e22]/20 to-[#d35400]/10 border border-[#e67e22]/30 rounded-xl p-6 mb-2">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-[#e67e22] rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Icon name="HardHat" size={24} className="text-white" />
                   </div>
-                  <div className="text-[#dcddde] text-sm sm:text-base">
-                    <p className="mb-3 sm:mb-4">
-                      <strong>Добро пожаловать в Дискордик!</strong> Показывай свой прогресс в Figma прямо в Discord.
+                  <div className="flex-1">
+                    <h2 className="text-white text-xl font-bold mb-1">
+                      Добро пожаловать в СтройУчёт 👷
+                    </h2>
+                    <p className="text-[#c8d0de] text-sm leading-relaxed mb-4">
+                      Платформа для строительных компаний: учёт расходов по чекам, составление смет,
+                      аналитика и рассылка отчётов заинтересованным лицам — всё в одном месте.
                     </p>
-                    <div className="bg-[#2f3136] border-l-4 border-[#5865f2] p-3 sm:p-4 rounded">
-                      <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">Что умеет Дискордик:</h3>
-                      <ul className="space-y-1 text-xs sm:text-sm text-[#b9bbbe]">
-                        <li>Автоматически определяет Figma в браузере и приложении</li>
-                        <li>Показывает название текущего проекта/файла</li>
-                        <li>Обновляется каждые 5 секунд в реальном времени</li>
-                        <li>Очищает статус при простое</li>
-                        <li>Работает на всех платформах</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Сообщение пользователя с Rich Presence */}
-              <div className="flex gap-2 sm:gap-4">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white text-xs sm:text-sm font-medium">М</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-white font-medium text-sm sm:text-base">Мария Дизайнер</span>
-                    <span className="text-[#72767d] text-xs hidden sm:inline">Сегодня в 12:05</span>
-                  </div>
-                  <div className="text-[#dcddde] mb-3 text-sm sm:text-base">
-                    Только начала работу над новым дизайном лендинга!
-                  </div>
-
-                  {/* Демо Rich Presence */}
-                  <div className="bg-[#2f3136] border border-[#202225] rounded-lg overflow-hidden w-full max-w-sm">
-                    {/* Заголовок профиля */}
-                    <div className="h-16 sm:h-20 bg-gradient-to-r from-[#5865f2] to-[#7c3aed] relative">
-                      <div className="absolute -bottom-3 sm:-bottom-4 left-3 sm:left-4">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-[#2f3136] bg-[#36393f] overflow-hidden">
-                          <div className="w-full h-full bg-gradient-to-br from-[#4f46e5] to-[#7c3aed] flex items-center justify-center">
-                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#2f3136] rounded-full flex items-center justify-center">
-                              <span className="text-lg sm:text-2xl">M</span>
-                            </div>
-                          </div>
-                          <div className="absolute -bottom-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-[#3ba55c] border-4 border-[#2f3136] rounded-full"></div>
-                        </div>
-                      </div>
-                      <Button
-                        size="sm"
-                        className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-[#4f545c] hover:bg-[#5d6269] text-white text-xs px-2 sm:px-3 py-1 rounded"
-                      >
-                        <Settings className="w-3 h-3 mr-1" />
-                        <span className="hidden sm:inline">Профиль</span>
+                    <div className="flex flex-wrap gap-3">
+                      <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white font-medium px-5">
+                        <Icon name="Plus" size={16} className="mr-2" />
+                        Зарегистрировать компанию
+                      </Button>
+                      <Button variant="ghost" className="text-[#c8d0de] hover:text-white hover:bg-[#252c3d] border border-[#252c3d]">
+                        Посмотреть демо
                       </Button>
                     </div>
-
-                    {/* Информация профиля */}
-                    <div className="pt-4 sm:pt-6 px-3 sm:px-4 pb-3 sm:pb-4">
-                      <div className="mb-3 sm:mb-4">
-                        <h3 className="text-white text-lg sm:text-xl font-bold mb-1">Мария</h3>
-                        <div className="flex items-center gap-2 text-[#b9bbbe] text-xs sm:text-sm">
-                          <span>maria_design</span>
-                          <span>-</span>
-                          <span>Она</span>
-                          <div className="flex gap-1 ml-2">
-                            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#5865f2] rounded-sm"></div>
-                            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#3ba55c] rounded-sm"></div>
-                            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#faa61a] rounded-sm"></div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Статусное сообщение */}
-                      <div className="mb-3 sm:mb-4">
-                        <div className="bg-[#36393f] rounded-lg p-2 sm:p-3 relative">
-                          <div className="absolute -top-2 left-3 sm:left-4 w-4 h-4 bg-[#36393f] rotate-45"></div>
-                          <div className="flex items-center gap-2 text-[#dcddde] text-xs sm:text-sm">
-                            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#5865f2] rounded-full flex items-center justify-center">
-                              <span className="text-xs">*</span>
-                            </div>
-                            <span>Работаю над проектом...</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Вкладки */}
-                      <div className="flex border-b border-[#40444b] mb-3 sm:mb-4">
-                        <button className="px-3 sm:px-4 py-2 text-[#8e9297] text-xs sm:text-sm font-medium hover:text-[#dcddde]">
-                          Обо мне
-                        </button>
-                        <button className="px-3 sm:px-4 py-2 text-white text-xs sm:text-sm font-medium border-b-2 border-[#5865f2]">
-                          Активность
-                        </button>
-                      </div>
-
-                      {/* Активность Дискордик */}
-                      <div>
-                        <div className="flex items-center gap-2 text-[#8e9297] text-xs font-semibold uppercase tracking-wide mb-2 sm:mb-3">
-                          <span>Играет</span>
-                        </div>
-
-                        <div className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-[#36393f] rounded-lg">
-                          {/* Логотип Figma */}
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[#ff7262] to-[#f24e1e] rounded-lg flex items-center justify-center flex-shrink-0">
-                            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.015-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148z" />
-                            </svg>
-                          </div>
-
-                          {/* Детали активности */}
-                          <div className="flex-1 min-w-0">
-                            <div className="text-white font-semibold text-xs sm:text-sm mb-1">Дискордик</div>
-                            <div className="text-[#dcddde] text-xs sm:text-sm mb-1">Работаю над логотипом</div>
-                            <div className="text-[#b9bbbe] text-xs sm:text-sm mb-2">Figma Desktop</div>
-                            <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 bg-[#3ba55c] rounded-full animate-pulse"></div>
-                              <span className="text-[#3ba55c] text-xs font-medium">0:37 прошло</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Еще одно сообщение пользователя */}
-              <div className="flex gap-2 sm:gap-4">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white text-xs sm:text-sm font-medium">И</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <span className="text-white font-medium text-sm sm:text-base">Иван UX</span>
-                    <span className="text-[#72767d] text-xs hidden sm:inline">Сегодня в 12:08</span>
+              {/* Статистика */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { label: "Расходов за месяц", value: "₽ 1 247 300", icon: "TrendingUp", color: "#e67e22" },
+                  { label: "Активных объектов", value: "4", icon: "Building2", color: "#2980b9" },
+                  { label: "Чеков добавлено", value: "83", icon: "Receipt", color: "#27ae60" },
+                  { label: "Участников команды", value: "12", icon: "Users", color: "#8e44ad" },
+                ].map((stat) => (
+                  <div key={stat.label} className="bg-[#141824] rounded-xl p-4 border border-[#252c3d]">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name={stat.icon} size={16} style={{ color: stat.color }} />
+                      <span className="text-[#8892a4] text-xs">{stat.label}</span>
+                    </div>
+                    <div className="text-white font-bold text-lg">{stat.value}</div>
                   </div>
-                  <div className="text-[#dcddde] text-sm sm:text-base">
-                    Обожаю видеть прогресс всех! Дискордик делает общение таким удобным
-                  </div>
-                </div>
+                ))}
               </div>
 
-              {/* Секция "Начало работы" */}
-              <div className="bg-[#2f3136] border border-[#202225] rounded-lg p-4 sm:p-6 mt-6 sm:mt-8">
-                <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Download className="w-5 h-5 sm:w-6 sm:h-6 text-[#5865f2]" />
-                  Начни работу с Дискордик
-                </h2>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
-                  <div className="text-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#5865f2] rounded-full flex items-center justify-center mx-auto mb-3">
-                      <span className="text-white font-bold text-sm sm:text-base">1</span>
-                    </div>
-                    <h3 className="text-white font-medium mb-2 text-sm sm:text-base">Скачай приложение</h3>
-                    <p className="text-[#b9bbbe] text-xs sm:text-sm">Получи Дискордик для Windows, macOS или Linux</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#5865f2] rounded-full flex items-center justify-center mx-auto mb-3">
-                      <span className="text-white font-bold text-sm sm:text-base">2</span>
-                    </div>
-                    <h3 className="text-white font-medium mb-2 text-sm sm:text-base">Авторизуй Discord</h3>
-                    <p className="text-[#b9bbbe] text-xs sm:text-sm">Подключись безопасно через OAuth</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#5865f2] rounded-full flex items-center justify-center mx-auto mb-3">
-                      <span className="text-white font-bold text-sm sm:text-base">3</span>
-                    </div>
-                    <h3 className="text-white font-medium mb-2 text-sm sm:text-base">Начни дизайнить</h3>
-                    <p className="text-[#b9bbbe] text-xs sm:text-sm">Открой Figma и смотри как работает магия</p>
-                  </div>
+              {/* Лента чеков */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-px h-4 bg-[#e67e22] rounded-full"></div>
+                  <span className="text-[#8892a4] text-xs font-semibold uppercase tracking-wide">Последние операции</span>
                 </div>
-
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button className="bg-[#5865f2] hover:bg-[#4752c4] text-white px-6 sm:px-8 py-2 sm:py-3 rounded text-sm font-medium">
-                    <Download className="w-4 h-4 mr-2" />
-                    Скачать Дискордик
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-[#4f545c] text-[#b9bbbe] hover:bg-[#40444b] hover:border-[#6d6f78] px-6 sm:px-8 py-2 sm:py-3 rounded text-sm font-medium bg-transparent"
-                  >
-                    <Shield className="w-4 h-4 mr-2" />
-                    Авторизовать Discord
-                  </Button>
-                </div>
-              </div>
-
-              {/* Преимущества */}
-              <div className="bg-[#2f3136] border border-[#202225] rounded-lg p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-4">Почему Дискордик?</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  {[
-                    {
-                      icon: <Zap className="w-4 h-4 sm:w-5 sm:h-5" />,
-                      title: "Автоопределение",
-                      desc: "Работает с приложением и браузером",
-                    },
-                    {
-                      icon: <Eye className="w-4 h-4 sm:w-5 sm:h-5" />,
-                      title: "Умное отслеживание",
-                      desc: "Показывает имена проектов и статус",
-                    },
-                    {
-                      icon: <Clock className="w-4 h-4 sm:w-5 sm:h-5" />,
-                      title: "Обновление в реальном времени",
-                      desc: "Синхронизация каждые 5 секунд",
-                    },
-                    {
-                      icon: <Shield className="w-4 h-4 sm:w-5 sm:h-5" />,
-                      title: "Приватность прежде всего",
-                      desc: "Никакого сбора данных",
-                    },
-                  ].map((feature, index) => (
+                <div className="space-y-1">
+                  {receipts.map((msg, i) => (
                     <div
-                      key={index}
-                      className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 rounded hover:bg-[#36393f] transition-colors"
+                      key={i}
+                      className="flex gap-3 p-3 rounded-lg hover:bg-[#141824] cursor-pointer group transition-colors"
                     >
-                      <div className="text-[#5865f2] mt-0.5">{feature.icon}</div>
-                      <div>
-                        <div className="text-white font-medium text-xs sm:text-sm">{feature.title}</div>
-                        <div className="text-[#b9bbbe] text-xs sm:text-sm">{feature.desc}</div>
+                      <div
+                        className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 text-white text-sm font-bold"
+                        style={{ backgroundColor: msg.avatarColor }}
+                      >
+                        {msg.avatar}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline gap-2 flex-wrap">
+                          <span className="text-white text-sm font-semibold">{msg.author}</span>
+                          <span className="text-[#8892a4] text-xs">{msg.time}</span>
+                        </div>
+                        <p className="text-[#c8d0de] text-sm mt-0.5">{msg.text}</p>
+                        {msg.amount && (
+                          <div className="flex items-center gap-2 mt-2">
+                            <span
+                              className="text-white font-bold text-sm bg-[#252c3d] px-3 py-1 rounded-lg"
+                            >
+                              {msg.amount}
+                            </span>
+                            <span
+                              className="text-xs px-2 py-0.5 rounded-full font-medium"
+                              style={{ backgroundColor: msg.categoryColor + "33", color: msg.categoryColor }}
+                            >
+                              {msg.category}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
 
-            {/* Поле ввода сообщения */}
-            <div className="p-2 sm:p-4">
-              <div className="bg-[#40444b] rounded-lg px-3 sm:px-4 py-2 sm:py-3">
-                <div className="text-[#72767d] text-xs sm:text-sm">Сообщение #витрина</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Боковая панель участников - скрыта на мобильных/планшетах */}
-          <div className="hidden xl:block w-60 bg-[#2f3136] p-4">
-            <div className="mb-4">
-              <h3 className="text-[#8e9297] text-xs font-semibold uppercase tracking-wide mb-2">В сети - 3</h3>
-              <div className="space-y-2">
-                {[
-                  {
-                    name: "Мария Дизайнер",
-                    status: "Работает в Figma",
-                    avatar: "М",
-                    color: "from-purple-500 to-pink-500",
-                  },
-                  { name: "Иван UX", status: "В сети", avatar: "И", color: "from-green-500 to-blue-500" },
-                  { name: "Алексей", status: "Разрабатывает Дискордик", avatar: "А", color: "from-blue-500 to-purple-500" },
-                ].map((user, index) => (
-                  <div key={index} className="flex items-center gap-3 p-2 rounded hover:bg-[#36393f] cursor-pointer">
+              {/* Возможности платформы */}
+              <div className="pt-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-px h-4 bg-[#2980b9] rounded-full"></div>
+                  <span className="text-[#8892a4] text-xs font-semibold uppercase tracking-wide">Возможности платформы</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {features.map((f) => (
                     <div
-                      className={`w-8 h-8 bg-gradient-to-r ${user.color} rounded-full flex items-center justify-center relative`}
+                      key={f.title}
+                      className="bg-[#141824] border border-[#252c3d] rounded-xl p-4 hover:border-[#e67e22]/50 transition-colors"
                     >
-                      <span className="text-white text-sm font-medium">{user.avatar}</span>
-                      <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#3ba55c] border-2 border-[#2f3136] rounded-full"></div>
+                      <div className="w-9 h-9 bg-[#e67e22]/15 rounded-lg flex items-center justify-center mb-3">
+                        <Icon name={f.icon} size={18} className="text-[#e67e22]" />
+                      </div>
+                      <h3 className="text-white font-semibold text-sm mb-1">{f.title}</h3>
+                      <p className="text-[#8892a4] text-xs leading-relaxed">{f.desc}</p>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-white text-sm font-medium truncate">{user.name}</div>
-                      <div className="text-[#b9bbbe] text-xs truncate">{user.status}</div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Rich Presence — пример сметы */}
+              <div className="pt-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-px h-4 bg-[#27ae60] rounded-full"></div>
+                  <span className="text-[#8892a4] text-xs font-semibold uppercase tracking-wide">Пример сметы</span>
+                </div>
+                <div className="bg-[#141824] border border-[#252c3d] rounded-xl overflow-hidden max-w-md">
+                  <div className="flex items-center gap-3 p-4 border-b border-[#252c3d]">
+                    <div className="w-10 h-10 bg-[#27ae60] rounded-xl flex items-center justify-center">
+                      <Icon name="FileText" size={18} className="text-white" />
+                    </div>
+                    <div>
+                      <div className="text-white font-semibold text-sm">Смета — Жилой комплекс А</div>
+                      <div className="text-[#8892a4] text-xs">Составлена: 9 июня 2026</div>
                     </div>
                   </div>
-                ))}
+                  <div className="p-4 space-y-2">
+                    {[
+                      { name: "Фундаментные работы", sum: "₽ 480 000" },
+                      { name: "Кирпичная кладка", sum: "₽ 320 000" },
+                      { name: "Кровельные материалы", sum: "₽ 215 000" },
+                      { name: "Внутренняя отделка", sum: "₽ 390 000" },
+                    ].map((item) => (
+                      <div key={item.name} className="flex items-center justify-between py-1.5 border-b border-[#1a1f2e] last:border-0">
+                        <span className="text-[#c8d0de] text-sm">{item.name}</span>
+                        <span className="text-white font-semibold text-sm">{item.sum}</span>
+                      </div>
+                    ))}
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="text-[#8892a4] text-sm font-semibold">ИТОГО</span>
+                      <span className="text-[#27ae60] font-bold text-base">₽ 1 405 000</span>
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4">
+                    <Button className="w-full bg-[#27ae60] hover:bg-[#219a52] text-white text-sm font-medium">
+                      <Icon name="Send" size={14} className="mr-2" />
+                      Отправить заказчику
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="bg-gradient-to-r from-[#141824] to-[#1a1f2e] border border-[#252c3d] rounded-xl p-6 text-center mt-4">
+                <h3 className="text-white text-lg font-bold mb-2">Готовы навести порядок в учёте?</h3>
+                <p className="text-[#8892a4] text-sm mb-4">
+                  Зарегистрируйте компанию и добавьте первый объект за 5 минут
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button className="bg-[#e67e22] hover:bg-[#d35400] text-white px-8 py-2 font-medium">
+                    Начать бесплатно
+                  </Button>
+                  <Button variant="ghost" className="text-[#c8d0de] hover:text-white hover:bg-[#252c3d] border border-[#252c3d]">
+                    <Icon name="MessageCircle" size={16} className="mr-2" />
+                    Связаться с нами
+                  </Button>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Нижняя панель ввода */}
+            <div className="p-4 bg-[#1a1f2e] border-t border-[#0d1017]">
+              <div className="flex items-center gap-3 bg-[#141824] rounded-lg px-4 py-3 border border-[#252c3d]">
+                <Icon name="Plus" size={18} className="text-[#8892a4] cursor-pointer hover:text-[#e67e22] flex-shrink-0" />
+                <span className="text-[#8892a4] text-sm flex-1">Добавить чек или операцию...</span>
+                <div className="flex items-center gap-2">
+                  <Icon name="Paperclip" size={16} className="text-[#8892a4] cursor-pointer hover:text-[#c8d0de]" />
+                  <Icon name="Camera" size={16} className="text-[#8892a4] cursor-pointer hover:text-[#c8d0de]" />
+                </div>
               </div>
             </div>
           </div>
